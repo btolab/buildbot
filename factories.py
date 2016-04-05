@@ -71,6 +71,14 @@ def uxme(cfg, buildname):
 		bf.addStep(cfg['gitversion'])
 	bf.addStep(
 		steps.ShellCommand(
+			name="fetch support",
+			command=["git", "clone", "--depth=1", "--branch=mame", "https://github.com/zaplabs/buildsupport.git", ".buildsupport"],
+			description="download latest build support tool",
+			haltOnFailure=True
+		)
+	)
+	bf.addStep(
+		steps.Compile(
 			name="create package",
 			command=['bash', '-c', 'util/win/create-pkg.sh'],
 			description='make and package',
@@ -94,7 +102,7 @@ def mame(cfg, buildname):
 	bf.addStep(
 		steps.ShellCommand(
 			name="fetch support",
-			command=["git clone --depth=1 --branch mame https://github.com/zaplabs/buildsupport.git .buildsupport"],
+			command=["git", "clone", "--depth=1", "--branch=mame", "https://github.com/zaplabs/buildsupport.git", ".buildsupport"],
 			description="download latest build support tool",
 			haltOnFailure=True
 		)

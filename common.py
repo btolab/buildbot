@@ -19,7 +19,7 @@ repos = {
 		'builders': {
 			'windows': names(get_slaves(mingw32=True))
 		},
-		'gitverison': SetPropertyFromCommand(command="git describe --always | sed 's/^mame//'", property='gitversion', haltOnFailure=True),
+		'gitversion': SetPropertyFromCommand(command="git describe --always | sed 's/^mame//'", property='gitversion', haltOnFailure=True),
 		'environment': environment,
 		'scheduler': ['trigger'],
 	},
@@ -39,7 +39,7 @@ repos = {
 			'windows': names(get_slaves(mingw32=True,mingw64=True)),
 			'osx': names(get_slaves(osxcross=True)),
 		},
-		'gitverison': SetPropertyFromCommand(command="git describe --always | sed 's/-[^-]\\{8\\}$//'", property='gitversion', haltOnFailure=True),
+		'gitversion': SetPropertyFromCommand(command="git describe --always | sed 's/-[^-]\\{8\\}$//'", property='gitversion', haltOnFailure=True),
 		'environment': environment,
 		'scheduler': ['trigger'],
 	}
