@@ -10,7 +10,7 @@ from cfgbb.common import repos
 schedulers = []
 
 for rname, ropts in repos.items():
-	rbns = [ rname + '-' + x for x in ropts['builders'] ]
+	rbns = [ rname + '-' + x for x in ropts['builders'].keys() ]
 	schedulers.append(
 		SingleBranchScheduler(
 			name=rname+'-checkin',

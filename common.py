@@ -16,8 +16,10 @@ repos = {
 	'mame': {
 		'url': 'https://github.com/mamedev/mame.git',
 		'branch': 'master',
-		'builders': [ 'windows' ],
-		'slaves': names(get_slaves(mingw32=True,mingw64=True)),
+		'builders': {
+			'windows': names(get_slaves(mingw32=True))
+		},
+		'gitverison': SetPropertyFromCommand(command="git describe --always | sed 's/^mame//'", property='gitversion', haltOnFailure=True),
 		'environment': environment,
 		'scheduler': ['trigger'],
 	},
@@ -33,9 +35,11 @@ repos = {
 	'attractmode': {
 		'url': 'https://github.com/mickelson/attract.git',
 		'branch': 'master',
-		'builders': [ 'windows', 'osx' ],
+		'builders': {
+			'windows': names(get_slaves(mingw32=True,mingw64=True)),
+			'osx': names(get_slaves(osxcross=True)),
+		},
 		'gitverison': SetPropertyFromCommand(command="git describe --always | sed 's/-[^-]\\{8\\}$//'", property='gitversion', haltOnFailure=True),
-		'slaves': names(get_slaves(mingw32=True,mingw64=True,osxcross=True)),
 		'environment': environment,
 		'scheduler': ['trigger'],
 	}
