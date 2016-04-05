@@ -22,11 +22,11 @@ status.append(html.WebStatus(
 ))
 
 status.append(words.IRC(
-	host="irc.freenode.net",
-	nick="bb-meta",
+	host="irc.servercentral.net",
+	nick="zlbuildbot",
 	notify_events={
 		'successToFailure': 1,
 		'failtureToSuccess': 1,
 	},
-	channels=['#buildbot']
+	channels=['#zaplabs']
 ))
