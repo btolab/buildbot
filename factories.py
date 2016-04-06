@@ -114,9 +114,17 @@ def mame(cfg, buildname):
 		)
 	)
 	bf.addStep(
+		steps.ShellCommand(
+			name="package",
+			command=['bash', '-c', '.buildsupport/release.sh'],
+			haltOnFailure=True, flunkOnFailure=True
+		)
+	)
+	bf.addStep(
 		steps.MultipleFileUpload(
 			slavesrcs=[
-				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.exe")
+				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.md5"),
+				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.exe"),
 			],
 			masterdest="~/sites/com.zaplabs/build/public/project/mame",
 			url="/project/mame",

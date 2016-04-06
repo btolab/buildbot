@@ -23,10 +23,12 @@ status.append(html.WebStatus(
 
 status.append(words.IRC(
 	host="irc.servercentral.net",
-	nick="zlbuildbot",
+	nick="h0tbb",
+	useColors=True,
 	notify_events={
+		'exception': 1,
 		'successToFailure': 1,
-		'failtureToSuccess': 1,
+		'failureToSuccess': 1
 	},
 	channels=['#zaplabs']
 ))
