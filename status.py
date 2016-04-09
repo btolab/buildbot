@@ -1,18 +1,28 @@
 status = []
 
+import os
 from buildbot.status import html
 from buildbot.status import words
-from buildbot.status.web.auth import BasicAuth
+from buildbot.status.web.auth import HTPasswdAprAuth
 from buildbot.status.web.authz import Authz
 
-users = [
-	('dev', 'bbot!')
-]
+http_auth=HTPasswdAprAuth(os.path.join(os.path.dirname(__file__), ".htpasswd"))
 
 authz = Authz(
-	auth=BasicAuth(users),
+    auth=http_auth,
+#	view='auth',
+	gracefulShutdown='auth',
 	forceBuild='auth',
 	forceAllBuilds='auth',
+	pingBuilder='auth',
+	stopBuild='auth',
+	stopAllBuilds='auth',
+	cancelPendingBuild='auth',
+	cancelAllPendingBuilds='auth',
+	stopChange='auth',
+	cleanShutdown='auth',
+	pauseSlave='auth',
+	showUsersPage='auth',
 )
 
 status.append(html.WebStatus(
