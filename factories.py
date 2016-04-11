@@ -26,13 +26,13 @@ def attractmode(cfg, buildname):
 	)
 	if 'gitversion' in cfg:
 		bf.addStep(cfg['gitversion'])
-	bf.addStep(
-		steps.Compile(
-			command=['bash', '-c', 'util/win/create-pkg.sh'],
-			haltOnFailure=True
-		)
-	)
 	if buildname == "osx":
+		bf.addStep(
+			steps.Compile(
+				command=['bash', '-c', 'source /opt/osxcross/buildbot-env; util/' + buildname[:3] + '/create-pkg.sh'],
+				haltOnFailure=True
+			)
+		)
 		bf.addStep(
 			steps.MultipleFileUpload(
 				slavesrcs=[
@@ -44,6 +44,12 @@ def attractmode(cfg, buildname):
 			)
 		)
 	elif buildname == "windows":
+		bf.addStep(
+			steps.Compile(
+				command=['bash', '-c', 'util/' + buildname[:3] + '/create-pkg.sh'],
+				haltOnFailure=True
+			)
+		)
 		bf.addStep(
 			steps.MultipleFileUpload(
 				slavesrcs=[
