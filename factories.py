@@ -133,7 +133,7 @@ def mame(cfg, buildname):
 				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.exe"),
 			],
 			masterdest="~/sites/com.zaplabs/build/public/project/mame",
-			url="/project/mame",
+			url="/project/mame/archive",
 			haltOnFailure=False, flunkOnFailure=False, mode=0644
 		)
 	)
