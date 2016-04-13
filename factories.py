@@ -129,8 +129,8 @@ def mame(cfg, buildname):
 	bf.addStep(
 		steps.MultipleFileUpload(
 			slavesrcs=[
-				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.md5"),
-				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.exe"),
+				util.Interpolate("mame-mingw-gcc-x64-%(prop:gitversion)s.md5"),
+				util.Interpolate("mame-mingw-gcc-x64-%(prop:gitversion)s.exe"),
 			],
 			masterdest="~/sites/com.zaplabs/build/public/project/mame/archive",
 			url="/project/mame",
