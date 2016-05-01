@@ -40,7 +40,7 @@ slaves = [
 			'osversion': '22',
 		},
 		max_count=2,
-		mingw32=True, mingw64=True, osxcross=True
+		osxcross=True
 	),
 	BotSlave('archct',
 		properties = {
