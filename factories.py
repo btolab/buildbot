@@ -1,19 +1,5 @@
 from buildbot.plugins import steps, util
 
-#class FileUploadWithUrls(FileUpload):
-#	renderables = ["auxUrls"]
-#
-#	def __init__(self, auxUrls=None, **kwargs):
-#		self.auxUrls = auxUrls
-#		FileUpload.__init__(self, **kwargs)
-#		self.addFactoryArguments(auxUrls=auxUrls)
-#
-#	def start(self):
-#		if self.auxUrls is not None:
-#			for url in self.auxUrls:
-#				self.addURL(os.path.basename(url), url)
-#		FileUpload.start(self)
-
 def attractmode(cfg, buildname):
 	bf = util.BuildFactory()
 	bf.addStep(
@@ -63,35 +49,6 @@ def attractmode(cfg, buildname):
 		)
 	return bf
 
-def uxme(cfg, buildname):
-	bf = util.BuildFactory()
-	bf.addStep(
-		steps.Git(
-			repourl=cfg['url'],
-			branch=cfg['branch'],
-			mode='full',
-			logEnviron=False
-		)
-	)
-	if 'gitversion' in cfg:
-		bf.addStep(cfg['gitversion'])
-	bf.addStep(
-		steps.ShellCommand(
-			name="fetch support",
-			command=["git", "clone", "--depth=1", "--branch=mame", "https://github.com/zaplabs/buildsupport.git", ".buildsupport"],
-			description="download latest build support tool",
-			haltOnFailure=True
-		)
-	)
-	bf.addStep(
-		steps.Compile(
-			name="create package",
-			command=['bash', '-c', 'util/win/create-pkg.sh'],
-			description='make and package',
-			haltOnFailure=True
-		)
-	)
-	return bf
 
 def mame(cfg, buildname):
 	bf = util.BuildFactory()
