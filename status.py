@@ -34,15 +34,19 @@ status.append(html.WebStatus(
 ))
 
 ircbot = json.load(open(os.path.join(os.path.dirname(__file__), "ircbot.json")))
-status.append(words.IRC(
-	host=ircbot['server'],
-	nick=ircbot['nick'],
-	password=ircbot['password'],
-	useColors=True,
-	notify_events={
-		'exception': 1,
-		'successToFailure': 1,
-		'failureToSuccess': 1,
-	},
-	channels=ircbot['channels']
-))
+
+for irccfg in ircbot:
+	status.append(words.IRC(
+		host=irccfg['server'],
+		nick=irccfg['nick'],
+		password=irccfg['password'],
+		useColors=True,
+		notify_events={
+			'successToFailure': 1,
+			'failureToSuccess': 1,
+			'successToException': 1,
+			'exceptionToSuccess': 1,
+		},
+		channels=irccfg['channels'],
+		tags=irccfg['tags'],
+	))

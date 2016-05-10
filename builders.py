@@ -20,6 +20,7 @@ for rname, rcfg in repos.items():
 				name=rname+'-'+bn,
 				slavenames=slns,
 				locks=[lock.access('counting')],
+				tags=[rname,bn],
 				env=rcfg['environment'],
 				factory=f
 			)
