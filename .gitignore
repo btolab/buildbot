@@ -1,3 +1,4 @@
 *.pass
 *.pyc
 .htpasswd
+*.json

@@ -8,6 +8,8 @@ from buildbot.status.web.authz import Authz
 
 http_auth=HTPasswdAprAuth(os.path.join(os.path.dirname(__file__), ".htpasswd"))
 
+import simplejson as json
+
 authz = Authz(
     auth=http_auth,
 #	view='auth',
@@ -31,14 +33,16 @@ status.append(html.WebStatus(
 	order_console_by_time=True,
 ))
 
+ircbot = json.load(open(os.path.join(os.path.dirname(__file__), "ircbot.json")))
 status.append(words.IRC(
-	host="irc.servercentral.net",
-	nick="h0tbb",
+	host=ircbot['server'],
+	nick=ircbot['nick'],
+	password=ircbot['password'],
 	useColors=True,
 	notify_events={
 		'exception': 1,
 		'successToFailure': 1,
-		'failureToSuccess': 1
+		'failureToSuccess': 1,
 	},
-	channels=['#zaplabs']
+	channels=ircbot['channels']
 ))
