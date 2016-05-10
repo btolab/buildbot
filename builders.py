@@ -1,17 +1,20 @@
 import textwrap
 import itertools
+import importlib
 
 from buildbot.config import BuilderConfig
 
 from cfgbb.common import repos, environment
 from cfgbb.slaves import lock
-from cfgbb import factories
 
 builders = []
+factories = {}
 
 for rname, rcfg in repos.items():
+	if not factories.has_key(rname):
+		factories[rname] = importlib.import_module('cfgbb.factories.'+rname)
 	for bn, slns in rcfg['builders'].items():
-		f = getattr(factories, rname)(rcfg, bn)
+		f = getattr(factories[rname], 'build')(rcfg, bn)
 		builders.append(
 			BuilderConfig(
 				name=rname+'-'+bn,
