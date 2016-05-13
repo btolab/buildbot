@@ -24,7 +24,7 @@ def build(cfg, buildname):
 				slavesrcs=[
 					util.Interpolate("attract-%(prop:gitversion)s.dmg"),
 				],
-				masterdest="~/sites/com.zaplabs/build/public/project/attractmode/osx",
+				masterdest="~/sites/com.btolab/build/public/project/attractmode/osx",
 				url="/project/attractmode/osx",
 				haltOnFailure=False, flunkOnFailure=False, mode=0644
 			)
@@ -42,7 +42,7 @@ def build(cfg, buildname):
 					util.Interpolate('attract-%(prop:gitversion)s-win32.zip'),
 					util.Interpolate('attract-%(prop:gitversion)s-win64.zip'),
 				],
-				masterdest="~/sites/com.zaplabs/build/public/project/attractmode/windows",
+				masterdest="~/sites/com.btolab/build/public/project/attractmode/windows",
 				url="/project/attractmode/windows",
 				haltOnFailure=False, flunkOnFailure=False, mode=0644
 			)

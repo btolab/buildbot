@@ -15,7 +15,7 @@ def build(cfg, buildname):
 	bf.addStep(
 		steps.ShellCommand(
 			name="fetch support",
-			command=["git", "clone", "--depth=1", "--branch=mame", "https://github.com/zaplabs/buildsupport.git", ".buildsupport"],
+			command=["git", "clone", "--depth=1", "--branch=mame", "https://github.com/btolab/buildsupport.git", ".buildsupport"],
 			description="download latest build support tool",
 			haltOnFailure=True
 		)
@@ -39,7 +39,7 @@ def build(cfg, buildname):
 				util.Interpolate("mame-mingw-gcc-x64-%(prop:gitversion)s.md5"),
 				util.Interpolate("mame-mingw-gcc-x64-%(prop:gitversion)s.exe"),
 			],
-			masterdest="~/sites/com.zaplabs/build/public/project/mame/archive",
+			masterdest="~/sites/com.btolab/build/public/project/mame/archive",
 			url="/project/mame",
 			haltOnFailure=False, flunkOnFailure=False, mode=0644
 		)
