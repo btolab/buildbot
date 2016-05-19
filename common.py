@@ -33,6 +33,16 @@ repos = {
 		'gitversion': SetPropertyFromCommand(command="git describe --always | sed 's/-[^-]\\{8\\}$//'", property='gitversion', haltOnFailure=True),
 		'environment': environment,
 		'scheduler': ['trigger'],
-	}
+	},
+	'hypseus': {
+		'url': 'https://github.com/btolab/hypseus.git',
+		'branch': 'master',
+		'builders': {
+			'windows': names(get_slaves(mingw64=True))
+		},
+		'gitversion': SetPropertyFromCommand(command="git describe --always", property='gitversion', haltOnFailure=True),
+		'environment': environment,
+		'scheduler': ['trigger'],
+	},
 }
 
