@@ -17,9 +17,19 @@ repos = {
 		'url': 'https://github.com/mamedev/mame.git',
 		'branch': 'master',
 		'builders': {
-			'windows': names(get_slaves(mingw64=True))
+			'windows': names(get_slaves(mingw32=True))
 		},
 		'gitversion': SetPropertyFromCommand(command="git describe --always | sed 's/^mame//'", property='gitversion', haltOnFailure=True),
+		'environment': environment,
+		'scheduler': ['trigger'],
+	},
+	'hbmame': {
+		'url': 'https://github.com/Robbbert/hbmame.git',
+		'branch': 'master',
+		'builders': {
+			'windows': names(get_slaves(mingw32=True))
+		},
+		'gitversion': SetPropertyFromCommand(command="git describe --always | sed 's/^hbmame//'", property='gitversion', haltOnFailure=True),
 		'environment': environment,
 		'scheduler': ['trigger'],
 	},

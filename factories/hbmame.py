@@ -15,7 +15,7 @@ def build(cfg, buildname):
 	bf.addStep(
 		steps.ShellCommand(
 			name="fetch support",
-			command=["git", "clone", "--depth=1", "--branch=mame", "https://github.com/btolab/buildsupport.git", ".buildsupport"],
+			command=["git", "clone", "--depth=1", "--branch=hbmame", "https://github.com/btolab/buildsupport.git", ".buildsupport"],
 			description="download latest build support tool",
 			haltOnFailure=True
 		)
@@ -36,11 +36,11 @@ def build(cfg, buildname):
 	bf.addStep(
 		steps.MultipleFileUpload(
 			slavesrcs=[
-				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.md5"),
-				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.exe"),
+				util.Interpolate("hbmame-mingw-gcc-x32-%(prop:gitversion)s.md5"),
+				util.Interpolate("hbmame-mingw-gcc-x32-%(prop:gitversion)s.exe"),
 			],
-			masterdest="~/sites/com.btolab/build/public/project/mame/archive",
-			url="/project/mame",
+			masterdest="~/sites/com.btolab/build/public/project/hbmame/archive",
+			url="/project/hbmame",
 			haltOnFailure=False, flunkOnFailure=False, mode=0644
 		)
 	)
