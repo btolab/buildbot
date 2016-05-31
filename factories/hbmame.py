@@ -36,8 +36,8 @@ def build(cfg, buildname):
 	bf.addStep(
 		steps.MultipleFileUpload(
 			slavesrcs=[
-				util.Interpolate("hbmame-mingw-gcc-x32-%(prop:gitversion)s.md5"),
-				util.Interpolate("hbmame-mingw-gcc-x32-%(prop:gitversion)s.exe"),
+				util.Interpolate("hbmame-mingw-gcc-x64-%(prop:gitversion)s.md5"),
+				util.Interpolate("hbmame-mingw-gcc-x64-%(prop:gitversion)s.exe"),
 			],
 			masterdest="~/sites/com.btolab/build/public/project/hbmame/archive",
 			url="/project/hbmame",

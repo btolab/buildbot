@@ -21,7 +21,7 @@ for rname, rcfg in repos.items():
 				slavenames=slns,
 				locks=[lock.access('counting')],
 				tags=[rname,bn],
-				env=rcfg['environment'],
+				env=rcfg['environment'][bn],
 				factory=f
 			)
 		)

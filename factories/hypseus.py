@@ -12,7 +12,7 @@ def build(cfg, buildname):
 	)
 	if 'gitversion' in cfg:
 		bf.addStep(cfg['gitversion'])
-	if buildname == "windows":
+	if buildname == "mingw64":
 		bf.addStep(
 			steps.Compile(
 				name="cmake",

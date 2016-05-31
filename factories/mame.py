@@ -22,26 +22,39 @@ def build(cfg, buildname):
 	)
 	bf.addStep(
 		steps.Compile(
-			command=['bash', '-c', '.buildsupport/build.sh'],
+			command=['bash', '-c', '.buildsupport/build.sh', buildname],
 			haltOnFailure=True
 		)
 	)
 	bf.addStep(
 		steps.ShellCommand(
 			name="package",
-			command=['bash', '-c', '.buildsupport/release.sh'],
+			command=['bash', '-c', '.buildsupport/release.sh', buildname],
 			haltOnFailure=True, flunkOnFailure=True
 		)
 	)
-	bf.addStep(
-		steps.MultipleFileUpload(
-			slavesrcs=[
-				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.md5"),
-				util.Interpolate("mame-mingw-gcc-x32-%(prop:gitversion)s.exe"),
-			],
-			masterdest="~/sites/com.btolab/build/public/project/mame/archive",
-			url="/project/mame",
-			haltOnFailure=False, flunkOnFailure=False, mode=0644
+	if buildname == "mingw64":
+		bf.addStep(
+			steps.MultipleFileUpload(
+				slavesrcs=[
+					util.Interpolate("mame-mingw-gcc-x64-%(prop:gitversion)s.md5"),
+					util.Interpolate("mame-mingw-gcc-x64-%(prop:gitversion)s.exe"),
+				],
+				masterdest="~/sites/com.btolab/build/public/project/mame/archive",
+				url="/project/mame",
+				haltOnFailure=False, flunkOnFailure=False, mode=0644
+			)
 		)
-	)
+	if buildname == "vs2015":
+		bf.addStep(
+			steps.MultipleFileUpload(
+				slavesrcs=[
+					util.Interpolate("mame-vs2015-x64-%(prop:gitversion)s.md5"),
+					util.Interpolate("mame-vs2015-x64-%(prop:gitversion)s.exe"),
+				],
+				masterdest="~/sites/com.btolab/build/public/project/mame/archive",
+				url="/project/mame",
+				haltOnFailure=False, flunkOnFailure=False, mode=0644
+			)
+		)
 	return bf

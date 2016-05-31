@@ -18,7 +18,7 @@ for rname, ropts in repos.items():
 				project=rname,
 				branch=ropts['branch'],
 			),
-			treeStableTimer=30*60,
+			treeStableTimer=60*60,
 			builderNames=rbns
 		)
 	)

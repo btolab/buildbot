@@ -10,6 +10,7 @@ class BotSlaveBase(object):
 	databases = {}
 	mingw64 = False
 	mingw32 = False
+	vs2015 = False
 	osxcross = False
 
 	def extract_attrs(self, name, **kwargs):
@@ -48,6 +49,13 @@ slaves = [
 		},
 		max_count=3,
 		mingw32=True, mingw64=True
+	),
+	BotSlave('h0tw10vm',
+		properties = {
+			'os': 'windows10',
+		},
+		max_count=2,
+		vs2015=True,
 	),
 ]
 
