@@ -22,14 +22,14 @@ def build(cfg, buildname):
 	)
 	bf.addStep(
 		steps.Compile(
-			command=['bash', '-c', '\'.buildsupport/build.sh $0\'', buildname],
+			command=['bash', '-c', '.buildsupport/build.sh $0', buildname],
 			haltOnFailure=True
 		)
 	)
 	bf.addStep(
 		steps.ShellCommand(
 			name="package",
-			command=['bash', '-c', '\'.buildsupport/release.sh $0\'', buildname],
+			command=['bash', '-c', '.buildsupport/release.sh $0', buildname],
 			haltOnFailure=True, flunkOnFailure=True
 		)
 	)

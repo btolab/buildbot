@@ -41,8 +41,8 @@ for irccfg in ircbot:
 		nick=irccfg['nick'],
 		password=irccfg['password'],
 		useColors=True,
-		useRevisions=True,
-		showBlameList=True,
+		useRevisions=irccfg['useRevisions'],
+		showBlameList=irccfg['showBlameList'],
 		notify_events={
 			'successToFailure': 1,
 			'failureToSuccess': 1,
