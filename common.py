@@ -56,7 +56,7 @@ repos = {
 			'android-x86': envandroid,
 			'android-x64': envandroid,
 		},
-		'scheduler': ['trigger'],
+		'scheduler': ['nightly'],
 	},
 	'hbmame': {
 		'url': 'https://github.com/Robbbert/hbmame.git',
@@ -68,7 +68,7 @@ repos = {
 		'environment': {
 			'mingw64': environment,
 		},
-		'scheduler': ['trigger'],
+		'scheduler': ['checkin'],
 	},
 	'attractmode': {
 		'url': 'https://github.com/mickelson/attract.git',
@@ -82,7 +82,7 @@ repos = {
 			'windows': environment,
 			'osx': environment,
 		},
-		'scheduler': ['trigger'],
+		'scheduler': ['checkin'],
 	},
 	'hypseus': {
 		'url': 'https://github.com/btolab/hypseus.git',
@@ -94,7 +94,7 @@ repos = {
 		'environment': {
 			'mingw64': environment,
 		},
-		'scheduler': ['trigger'],
+		'scheduler': ['checkin'],
 	},
 }
 

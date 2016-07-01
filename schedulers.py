@@ -11,25 +11,27 @@ schedulers = []
 
 for rname, ropts in repos.items():
 	rbns = [ rname + '-' + x for x in ropts['builders'].keys() ]
-	schedulers.append(
-		SingleBranchScheduler(
-			name=rname+'-checkin',
-			change_filter=ChangeFilter(
-				project=rname,
-				branch=ropts['branch'],
-			),
-			treeStableTimer=60*60,
-			builderNames=rbns
+	if 'checkin' in ropts['scheduler']:
+		schedulers.append(
+			SingleBranchScheduler(
+				name=rname+'-checkin',
+				change_filter=ChangeFilter(
+					project=rname,
+					branch=ropts['branch'],
+				),
+				treeStableTimer=60*60,
+				builderNames=rbns
+			)
 		)
-	)
-	#schedulers.append(
-	#	NightlyTriggerable(
-	#		name=rname + '-nightly',
-	#		builderNames=rbns,
-	#		hour=3,
-	#		minute=0,
-	#	)
-	#)
+	if 'nightly' in ropts['scheduler']:
+		schedulers.append(
+			NightlyTriggerable(
+				name=rname + '-nightly',
+				builderNames=rbns,
+				hour=3,
+				minute=0,
+			)
+		)
 	schedulers.append(
 		ForceScheduler(
 			name=rname + '-force',
