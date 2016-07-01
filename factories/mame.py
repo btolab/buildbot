@@ -17,7 +17,7 @@ def build(cfg, buildname):
 			name="fetch support",
 			command=["git", "clone", "--depth=1", "--branch=mame", "https://github.com/btolab/buildsupport.git", ".buildsupport"],
 			description="download latest build support tool",
-			haltOnFailure=True
+			haltOnFailure=True, flunkOnFailure=False
 		)
 	)
 	bf.addStep(
@@ -26,13 +26,24 @@ def build(cfg, buildname):
 			haltOnFailure=True
 		)
 	)
-	bf.addStep(
-		steps.ShellCommand(
-			name="package",
-			command=['bash', '-c', '.buildsupport/release.sh $0', buildname],
-			haltOnFailure=True, flunkOnFailure=True
+	if buildname.startswith("android"):
+		bf.addStep(
+			steps.FileUpload(
+				slavesrc="android-project/app/build/outputs/apk/app-release-unsigned.apk",
+				masterdest=util.Interpolate("~/sites/com.btolab/build/public/project/mame/archive/%(prop:buildername)s-%(prop:gitversion)s.apk"),
+				url="/project/mame",
+				description="upload apk",
+				haltOnFailure=False, flunkOnFailure=False, mode=0644
+			)
 		)
-	)
+	else:
+		bf.addStep(
+			steps.ShellCommand(
+				name="package",
+				command=['bash', '-c', '.buildsupport/release.sh $0', buildname],
+				haltOnFailure=True, flunkOnFailure=False
+			)
+		)
 	if buildname == "mingw64":
 		bf.addStep(
 			steps.MultipleFileUpload(

@@ -12,6 +12,8 @@ class BotSlaveBase(object):
 	mingw32 = False
 	vs2015 = False
 	osxcross = False
+	fastbuild = False
+	android = False
 
 	def extract_attrs(self, name, **kwargs):
 		self.slavename = name
@@ -40,22 +42,24 @@ slaves = [
 			'os': 'fedora',
 			'osversion': '22',
 		},
-		max_count=2,
+		max_count=1,
 		osxcross=True
 	),
 	BotSlave('archct',
 		properties = {
 			'os': 'archlinux',
 		},
-		max_count=3,
-		mingw32=True, mingw64=True
+		max_count=1,
+		mingw32=True, mingw64=True,
+		android=True,
 	),
 	BotSlave('h0tw10vm',
 		properties = {
 			'os': 'windows10',
 		},
-		max_count=2,
+		max_count=1,
 		vs2015=True,
+		fastbuild=True,
 	),
 ]
 
