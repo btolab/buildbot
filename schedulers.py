@@ -1,5 +1,5 @@
 from buildbot.schedulers.basic import SingleBranchScheduler
-from buildbot.schedulers.timed import NightlyTriggerable
+from buildbot.schedulers.timed import Nightly
 from buildbot.schedulers.forcesched import ForceScheduler
 
 from buildbot.changes.filter import ChangeFilter
@@ -25,11 +25,13 @@ for rname, ropts in repos.items():
 		)
 	if 'nightly' in ropts['scheduler']:
 		schedulers.append(
-			NightlyTriggerable(
+			Nightly(
 				name=rname + '-nightly',
 				builderNames=rbns,
+				branch=ropts['branch'],
 				hour=3,
 				minute=0,
+				onlyIfChanged=True,
 			)
 		)
 	schedulers.append(
