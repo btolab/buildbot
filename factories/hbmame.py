@@ -1,4 +1,5 @@
 from buildbot.plugins import steps, util
+from buildbot.steps.shell import SetPropertyFromCommand
 
 def build(cfg, buildname):
 	bf = util.BuildFactory()
@@ -10,8 +11,12 @@ def build(cfg, buildname):
 			logEnviron=False
 		)
 	)
-	if 'gitversion' in cfg:
-		bf.addStep(cfg['gitversion'])
+	bf.addStep(
+		SetPropertyFromCommand(
+			command="git describe --always | sed 's/^hbmame//'",
+			property='gitversion', haltOnFailure=True
+		)
+	)
 	bf.addStep(
 		steps.ShellCommand(
 			name="fetch support",

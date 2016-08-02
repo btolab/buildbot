@@ -1,4 +1,3 @@
-from buildbot.steps.shell import SetPropertyFromCommand
 from buildbot.process.properties import Interpolate
 
 from cfgbb.slaves import slaves, get_slaves, names
@@ -45,7 +44,6 @@ repos = {
 			'android-x86': names(get_slaves(android=True)),
 			'android-x64': names(get_slaves(android=True)),
 		},
-		'gitversion': SetPropertyFromCommand(command="git describe --always | sed 's/^mame//'", property='gitversion', haltOnFailure=True),
 		'environment': {
 			'mingw64': environment,
 			'vs2015': envwin,
@@ -64,7 +62,6 @@ repos = {
 		'builders': {
 			'mingw64': names(get_slaves(mingw64=True))
 		},
-		'gitversion': SetPropertyFromCommand(command="git describe --always | sed 's/^hbmame//'", property='gitversion', haltOnFailure=True),
 		'environment': {
 			'mingw64': environment,
 		},
@@ -77,7 +74,6 @@ repos = {
 			'windows': names(get_slaves(mingw32=True,mingw64=True)),
 			'osx': names(get_slaves(osxcross=True)),
 		},
-		'gitversion': SetPropertyFromCommand(command="git describe --always | sed 's/-[^-]\\{8\\}$//'", property='gitversion', haltOnFailure=True),
 		'environment': {
 			'windows': environment,
 			'osx': environment,
@@ -90,7 +86,6 @@ repos = {
 		'builders': {
 			'mingw64': names(get_slaves(mingw64=True))
 		},
-		'gitversion': SetPropertyFromCommand(command="git describe --always", property='gitversion', haltOnFailure=True),
 		'environment': {
 			'mingw64': environment,
 		},
